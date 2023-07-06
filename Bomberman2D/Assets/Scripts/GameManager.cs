@@ -3,7 +3,29 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameState gameState = GameState.Playing;
     public GameObject[] players;
+
+    public void ChangeGameState(GameState state)
+    {
+        //Guard statement
+        if (gameState == state)
+            return;
+
+        gameState = state;
+
+        switch (gameState)
+        {
+            case GameState.Playing:
+                break;
+            case GameState.Win:
+                break;
+            case GameState.Lose:
+                break;
+            default:
+                break;
+        }
+    }
 
     public void CheckWinState()
     {
@@ -11,12 +33,14 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject player in players)
         {
-            if (player.activeSelf) {
+            if (player.activeSelf)
+            {
                 aliveCount++;
             }
         }
 
-        if (aliveCount <= 1) {
+        if (aliveCount <= 1)
+        {
             Invoke(nameof(NewRound), 3f);
         }
     }
@@ -25,5 +49,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
 }
+
+public enum GameState { Playing, Win, Lose, }

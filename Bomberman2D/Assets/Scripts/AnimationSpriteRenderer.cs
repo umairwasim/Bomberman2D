@@ -10,7 +10,8 @@ public class AnimationSpriteRenderer : MonoBehaviour
     [SerializeField] private Sprite[] animationSprites;
 
     [SerializeField] private float animationRate = 0.25f;
-    [SerializeField] private int animationIndex;
+    
+    private int animationIndex;
 
     public bool isIdle = true;
     public bool isLoop = true;

@@ -24,33 +24,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        playerRB = GetComponent<Rigidbody2D>();
+        if (playerRB == null)
+            playerRB = GetComponent<Rigidbody2D>();
         activeAnimationSR = animationDown;
     }
 
     private void Update()
     {
-        //switch (KeyCode.None)
-        //{
-        //    case KeyCode.Space:
-        //        break;
-        //    case KeyCode.W:
-        //        SetDirection(Vector2.up, animationUp);
-        //        break;
-        //    case KeyCode.A:
-        //        SetDirection(Vector2.left, animationLeft);
-        //        break;
-        //    case KeyCode.S:
-        //        SetDirection(Vector2.right, animationRight);
-        //        break;
-        //    case KeyCode.D:
-        //        SetDirection(Vector2.down, animationDown);
-        //        break;
-        //    default:
-        //        SetDirection(Vector2.zero, activeAnimationSR);
-        //        break;
-        //}
-
         if (Input.GetKey(moveUp))
             SetDirection(Vector2.up, animationUp);
         else if (Input.GetKey(moveDown))
