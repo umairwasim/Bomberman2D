@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class BombController : MonoBehaviour
 {
     [Header("Bomb")]
-    public KeyCode bombKey = KeyCode.Space;
+    [SerializeField] private KeyCode bombKey = KeyCode.Space;
     public GameObject bombPrefab;
     public float bombFuseTime = 4f;
     public int bombAmount = 1;
@@ -23,6 +22,7 @@ public class BombController : MonoBehaviour
     public Destructible destructiblePrefab;
 
     private int remainingBombsCounter;
+    private const string BOMB = "Bomb";
 
     private void Start()
     {
@@ -39,7 +39,7 @@ public class BombController : MonoBehaviour
 
     IEnumerator PlaceBomb()
     {
-        Vector2 position = transform.position; //set bomb posiiton equals to player position
+        Vector2 position = transform.position; //set bomb position equals to player position
         position.x = Mathf.Round(position.x); //Round x and y so that it always spawns at the center of the tile
         position.y = Mathf.Round(position.y);
 
@@ -48,7 +48,7 @@ public class BombController : MonoBehaviour
         yield return new WaitForSeconds(bombFuseTime);
 
         //Explosion
-        position = bomb.transform.position; // set explosion position to bomb's position
+        position = bomb.transform.position; // set explosion position equals to bomb's position
         position.x = Mathf.Round(position.x);
         position.y = Mathf.Round(position.y);
 
@@ -77,7 +77,7 @@ public class BombController : MonoBehaviour
         if (length <= 0)
             return;
 
-        //inceremnt position to one unit direction (whichever it is that we called)
+        //incerement position to one unit direction (whichever it is that we called)
         position += direction;
 
         //check if it overlaps with a stage tile, then return and do not instantiate a sprite on that tile
@@ -120,7 +120,7 @@ public class BombController : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Bomb"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer(BOMB))
             collision.isTrigger = false;
     }
 }
