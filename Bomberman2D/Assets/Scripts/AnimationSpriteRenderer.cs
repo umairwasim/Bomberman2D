@@ -15,18 +15,32 @@ public class AnimationSpriteRenderer : MonoBehaviour
     public bool isIdle = true;
     public bool isLoop = true;
 
-    private void Awake() => spriteRenderer = GetComponent<SpriteRenderer>();
-    private void OnEnable() => spriteRenderer.enabled = true;
-    private void OnDisable() => spriteRenderer.enabled = false;
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
-    private void Start() => InvokeRepeating(nameof(AnimateFrame), animationRate, animationRate);
+    private void OnEnable()
+    {
+        spriteRenderer.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        spriteRenderer.enabled = false;
+    }
+
+    private void Start()
+    {
+        InvokeRepeating(nameof(AnimateFrame), animationRate, animationRate);
+    }
 
     void AnimateFrame()
     {
         //increment the index
         animationIndex++;
 
-        //if looping and index is has reached max length of sprites, reset it.
+        //if looping and index has reached max length of sprites, reset it.
         if (isLoop && animationIndex >= animationSprites.Length)
             animationIndex = 0;
 
