@@ -57,7 +57,6 @@ public class BombController : MonoBehaviour
         explosion.SetActiveSpriteRenderer(explosion.start);
         explosion.DestroyAfterSeconds(explosionDuration);
 
-
         //Call explode for each direction at that position
         Explode(position, Vector2.up, explosionRadius);
         Explode(position, Vector2.down, explosionRadius);
@@ -69,6 +68,12 @@ public class BombController : MonoBehaviour
         Destroy(bomb);
         remainingBombsCounter++;
     }
+
+    public void AddBomb()
+    {
+        bombAmount++;
+        remainingBombsCounter++;
+    }    
 
     //It is a recursive function it will keep on calling for each direction unless the exit condition is met
     public void Explode(Vector2 position, Vector2 direction, int length)
@@ -99,7 +104,7 @@ public class BombController : MonoBehaviour
 
     private void DestroyDestructible(Vector2 position)
     {
-        //convert world pos to cell position
+        //convert world position to cell position
         Vector3Int cell = destructibleTilemap.WorldToCell(position);
 
         //get that tile at cell position
