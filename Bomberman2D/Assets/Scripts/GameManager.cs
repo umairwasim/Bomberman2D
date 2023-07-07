@@ -3,8 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; set; }
+
     public GameState gameState = GameState.Playing;
     public GameObject[] players;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void ChangeGameState(GameState state)
     {
