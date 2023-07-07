@@ -67,6 +67,20 @@ public class PlayerMovement : MonoBehaviour
 
         activeAnimationSR = animationSpriteRenderer;
         activeAnimationSR.isIdle = currentDirection == Vector2.zero;
+    }
 
+    public void PlayDeathAnimation()
+    {
+        enabled = false;
+        animationDeath.enabled = true;
+        activeAnimationSR = animationDeath;
+
+        StartCoroutine(PlayerDeathRoutine());
+    }
+
+    IEnumerator PlayerDeathRoutine()
+    {
+        yield return new WaitForSeconds(1.25f);
+        gameObject.SetActive(false);
     }
 }
