@@ -4,33 +4,37 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D playerRB;
-
     public float moveSpeed = 5f;
 
-    public KeyCode moveUp = KeyCode.W;
-    public KeyCode moveDown = KeyCode.S;
-    public KeyCode moveLeft = KeyCode.A;
-    public KeyCode moveRight = KeyCode.D;
+    [SerializeField] private Rigidbody2D playerRB;
 
-    public AnimationSpriteRenderer animationUp;
-    public AnimationSpriteRenderer animationDown;
-    public AnimationSpriteRenderer animationLeft;
-    public AnimationSpriteRenderer animationRight;
+    [SerializeField] private KeyCode moveUp = KeyCode.W;
+    [SerializeField] private KeyCode moveDown = KeyCode.S;
+    [SerializeField] private KeyCode moveLeft = KeyCode.A;
+    [SerializeField] private KeyCode moveRight = KeyCode.D;
+
+    [SerializeField] private AnimationSpriteRenderer animationUp;
+    [SerializeField] private AnimationSpriteRenderer animationDown;
+    [SerializeField] private AnimationSpriteRenderer animationLeft;
+    [SerializeField] private AnimationSpriteRenderer animationRight;
+    [SerializeField] private AnimationSpriteRenderer animationDeath;
 
     private AnimationSpriteRenderer activeAnimationSR;
-
     private Vector2 currentDirection = Vector2.down;
 
     private void Awake()
     {
         if (playerRB == null)
             playerRB = GetComponent<Rigidbody2D>();
+
         activeAnimationSR = animationDown;
     }
 
     private void Update()
     {
+        if (GameManager.Instance.gameState != GameState.Playing)
+            return;
+
         if (Input.GetKey(moveUp))
             SetDirection(Vector2.up, animationUp);
         else if (Input.GetKey(moveDown))
@@ -55,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
     {
         currentDirection = newDirection;
 
+        //set the animation based on direction
         animationUp.enabled = animationSpriteRenderer == animationUp;
         animationDown.enabled = animationSpriteRenderer == animationDown;
         animationLeft.enabled = animationSpriteRenderer == animationLeft;
@@ -63,6 +68,5 @@ public class PlayerMovement : MonoBehaviour
         activeAnimationSR = animationSpriteRenderer;
         activeAnimationSR.isIdle = currentDirection == Vector2.zero;
 
-        //set the animation based on direction
     }
 }
