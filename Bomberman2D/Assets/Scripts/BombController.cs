@@ -22,6 +22,7 @@ public class BombController : MonoBehaviour
     public Destructible destructiblePrefab;
 
     private int remainingBombsCounter;
+    private const string EXPLOSION = "Explosion";
     private const string BOMB = "Bomb";
 
     private void Start()
@@ -31,10 +32,11 @@ public class BombController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.gameState != GameState.Playing)
+            return;
+
         if (Input.GetKeyDown(bombKey) && remainingBombsCounter > 0)
-        {
             StartCoroutine(PlaceBomb());
-        }
     }
 
     IEnumerator PlaceBomb()
@@ -73,7 +75,7 @@ public class BombController : MonoBehaviour
     {
         bombAmount++;
         remainingBombsCounter++;
-    }    
+    }
 
     //It is a recursive function it will keep on calling for each direction unless the exit condition is met
     public void Explode(Vector2 position, Vector2 direction, int length)
@@ -126,6 +128,16 @@ public class BombController : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(BOMB))
+        {
             collision.isTrigger = false;
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer(EXPLOSION))
+        {
+            GameManager.Instance.ChangeGameState(GameState.Lose);
+            PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+            {
+                playerMovement.PlayDeathAnimation();
+            }
+        }
     }
 }
