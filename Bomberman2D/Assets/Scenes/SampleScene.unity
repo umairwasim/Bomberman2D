@@ -2698,8 +2698,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a1b31ace26a5940b34155434663323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRB: {fileID: 0}
   moveSpeed: 5
+  playerRB: {fileID: 0}
   moveUp: 119
   moveDown: 115
   moveLeft: 97
@@ -2708,6 +2708,7 @@ MonoBehaviour:
   animationDown: {fileID: 855804903}
   animationLeft: {fileID: 1525966411}
   animationRight: {fileID: 85894497}
+  animationDeath: {fileID: 1754121142}
 --- !u!114 &174079621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4481,8 +4482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a1b31ace26a5940b34155434663323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRB: {fileID: 0}
   moveSpeed: 5
+  playerRB: {fileID: 0}
   moveUp: 119
   moveDown: 115
   moveLeft: 97
@@ -4491,6 +4492,7 @@ MonoBehaviour:
   animationDown: {fileID: 900025783}
   animationLeft: {fileID: 131555738}
   animationRight: {fileID: 155172302}
+  animationDeath: {fileID: 1427907970}
 --- !u!58 &1711161038
 CircleCollider2D:
   m_ObjectHideFlags: 0
